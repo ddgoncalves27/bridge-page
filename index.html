@@ -282,23 +282,25 @@
 
     <script>
         // --- Dynamic Link Configuration ---
-        const baseOfferUrl = 'https://glstrck.com/aff_c';
-        const offerId = '564';
-        const affiliateId = '1359';
-        let dynamicSource = '123'; // Default source value
+        var baseOfferUrl = 'https://glstrck.com/aff_c';
+        var offerId = '564';
+        var affiliateId = '1359';
+        var dynamicSource = '123'; // Default source value
 
         // --- Check Referrer and Update Source ---
         try {
-            const referrer = document.referrer;
+            var referrer = document.referrer;
             if (referrer) {
-                const referrerUrl = new URL(referrer);
+                var referrerUrl = new URL(referrer);
                 
                 // Get all path parts (everything after the domain)
-                const pathParts = referrerUrl.pathname.split('/').filter(part => part.length > 0);
+                var pathParts = referrerUrl.pathname.split('/').filter(function(part) {
+                    return part.length > 0;
+                });
                 
                 // If there's at least one path part
                 if (pathParts.length > 0) {
-                    const lastPathPart = pathParts[pathParts.length - 1];
+                    var lastPathPart = pathParts[pathParts.length - 1];
                     
                     // Extract only the first 4 letters from the path
                     if (lastPathPart.length > 0) {
@@ -313,13 +315,13 @@
         }
 
         // Create the final offer link with the dynamic source
-        const finalOfferLink = `${baseOfferUrl}?offer_id=${offerId}&aff_id=${affiliateId}&source=${dynamicSource}`;
+        var finalOfferLink = baseOfferUrl + '?offer_id=' + offerId + '&aff_id=' + affiliateId + '&source=' + dynamicSource;
         console.log("Final offer link:", finalOfferLink);
 
         // --- Page Elements ---
-        const ctaBtn = document.getElementById('ctaButton');
-        const ctaMsg = document.getElementById('ctaMessage');
-        const currentYearSpan = document.getElementById('currentYear');
+        var ctaBtn = document.getElementById('ctaButton');
+        var ctaMsg = document.getElementById('ctaMessage');
+        var currentYearSpan = document.getElementById('currentYear');
 
         if (currentYearSpan) {
             currentYearSpan.textContent = new Date().getFullYear();
@@ -327,13 +329,13 @@
 
         // --- CTA Button Event Listener ---
         if (ctaBtn) {
-            ctaBtn.addEventListener('click', () => {
+            ctaBtn.addEventListener('click', function() {
                 ctaBtn.disabled = true;
                 ctaBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1.5"></i> Processing...';
                 if (ctaMsg) {
                     ctaMsg.classList.remove('hidden');
                 }
-                setTimeout(() => {
+                setTimeout(function() {
                     window.location.href = finalOfferLink;
                 }, 500);
             });
