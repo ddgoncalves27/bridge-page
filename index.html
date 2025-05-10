@@ -330,14 +330,14 @@
         // --- CTA Button Event Listener ---
         if (ctaBtn) {
             ctaBtn.addEventListener('click', function() {
+                // Set the button state to indicate processing
                 ctaBtn.disabled = true;
                 ctaBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1.5"></i> Processing...';
-                if (ctaMsg) {
-                    ctaMsg.classList.remove('hidden');
-                }
-                setTimeout(function() {
-                    window.location.href = finalOfferLink;
-                }, 500);
+                
+                // Immediate redirect - no delay
+                window.location.href = finalOfferLink;
+                
+                // No setTimeout needed - redirect happens immediately
             });
         }
     </script>
